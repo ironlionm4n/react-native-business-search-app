@@ -3,7 +3,6 @@ import { View, Text, Button } from 'react-native'
 const HomeScreen = (props) => {
 
     const handleOnPress = () => {
-        console.log(props.navigation.navigate)
         props.navigation.navigate("Search")
     }
 
