@@ -1,23 +1,29 @@
 import React from 'react'
-import { View, Text, StyleSheet, ScrollView, FlatList, Image } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  Image
+} from 'react-native'
+import ResultsDetail from './ResultsDetail'
 
+const renderItem = ({ item }) => {
+  return <ResultsDetail item={item} />
+}
 const YelpResults = ({ headerText, restaurants }) => {
   return (
     <ScrollView>
-      <Text style={styles.titleText}>{headerText}</Text>
+      <View style={styles.containerText}>
+        <Text style={styles.titleText}>{headerText}</Text>
+      </View>
       <FlatList
         horizontal
+        showsHorizontalScrollIndicator={false}
         data={restaurants}
         keyExtractor={restaurant => restaurant.id}
-        renderItem={({item}) => {
-            return (
-                <View>
-
-                <Text>{item.name}</Text>
-                <Image source={{uri: item.image_url}} style={styles.tinyLogo}/>
-                </View>
-            )
-        }}
+        renderItem={renderItem}
       />
     </ScrollView>
   )
@@ -26,12 +32,16 @@ const YelpResults = ({ headerText, restaurants }) => {
 const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginHorizontal: 10,
   },
   tinyLogo: {
     width: 250,
-    height: 250,
+    height: 250
   },
+  containerText: {
+    marginBottom: 6,
+  }
 })
 
 export default YelpResults
