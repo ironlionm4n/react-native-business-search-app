@@ -11,7 +11,7 @@ const useGetBusinesses = () => {
         params: {
           limit: 50,
           term: searchTerm,
-          location: 'atlanta'
+          location: 'boston'
         }
       })
       console.log(response.data.businesses)

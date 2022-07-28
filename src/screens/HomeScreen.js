@@ -9,7 +9,7 @@ const HomeScreen = (props) => {
   return (
     <View>
       <Text>Home Screen</Text>
-      <Button title="Go to SearchScreen" onPress={handleOnPress}/>
+      <Button title="Go to Restaurant App" onPress={handleOnPress}/>
     </View>
   )
 }
