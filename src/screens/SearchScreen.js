@@ -1,39 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import SearchBar from '../components/SearchBar'
-import yelp from '../api/yelp'
+import useGetBusinesses from '../hooks/useGetBusinesses'
+import YelpResults from '../components/YelpResults'
+import FilterByPrice from '../utils/FilterByPrice'
 
 const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState('')
-  const [restaurants, setRestaurants] = useState([])
-
+  const [searchApi, restaurants, errorMessage] = useGetBusinesses()
+  
   const handleSetSearchTerm = newTerm => {
     setSearchTerm(newTerm)
   }
 
-  const searchApi = async () => {
-    const response = await yelp.get('/search', {
-      params: {
-        limit: 50,
-        term: searchTerm,
-        location: 'atlanta'
-      }
-    })
-    console.log(response.data.businesses)
-    setRestaurants(response.data.businesses)
-  }
-
   return (
-    <View>
+    <ScrollView>
       <SearchBar
         searchTerm={searchTerm}
         onHandleSetSearchTerm={handleSetSearchTerm}
-        onHandleSubmitSearch={searchApi}
+        onHandleSubmitSearch={()=>searchApi(searchTerm)}
       />
       <Text style={styles.title}>SearchScreen</Text>
       <Text># of Restaurants Found: {restaurants.length}</Text>
-    </View>
+      {errorMessage ? handleDisplayErrorMessage(errorMessage) : null}
+      <YelpResults headerText={"Cost Effective"} restaurants={FilterByPrice(restaurants,'$')}/>
+      <YelpResults headerText={"Bit Pricier"} restaurants={FilterByPrice(restaurants,'$$')}/>
+      <YelpResults headerText={"High Dollar"} restaurants={FilterByPrice(restaurants,'$$$')}/>
+    </ScrollView>
   )
+
+  function handleDisplayErrorMessage(errorMessage) {
+    setTimeout(() => {
+      setErrorMessage('')
+    }, 5000)
+    return <Text>{errorMessage}</Text>
+  }
 }
 
 const styles = StyleSheet.create({
