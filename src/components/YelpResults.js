@@ -30,7 +30,9 @@ const YelpResults = ({ headerText, restaurants, navigation }) => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('ResultsShow')}
+              onPress={() => navigation.navigate('ResultsShow', {
+                id: item.id
+              })}
             >
               <ResultsDetail item={item} />
             </TouchableOpacity>
