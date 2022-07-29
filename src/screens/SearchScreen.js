@@ -16,7 +16,6 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <>
-      {console.log(navigation)}
       <SearchBar
         searchTerm={searchTerm}
         onHandleSetSearchTerm={handleSetSearchTerm}

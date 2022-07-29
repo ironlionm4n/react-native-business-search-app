@@ -17,6 +17,10 @@ const renderItem = (item, navigation) => {
   )
 }
 const YelpResults = ({ headerText, restaurants, navigation }) => {
+  if(!restaurants.length) {
+    return null
+  }
+  
   return (
     <ScrollView>
       <View style={styles.containerText}>

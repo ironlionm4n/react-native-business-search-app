@@ -16,7 +16,6 @@ const SearchBar = props => {
             size={40}
             color='black'
             onPress={() => {
-              console.log('Search Icon pressed')
               searchInputRef.focus()
             }}
           />

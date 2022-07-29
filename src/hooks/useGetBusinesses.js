@@ -14,7 +14,6 @@ const useGetBusinesses = () => {
           location: 'boston'
         }
       })
-      console.log(response.data.businesses)
       setRestaurants(response.data.businesses)
     } catch (err) {
       setErrorMessage('An error occurred, please try again.')
@@ -23,7 +22,6 @@ const useGetBusinesses = () => {
 
   useEffect(() => {
     searchApi('pizza')
-    console.log('useEffect', restaurants)
 
     return () => {
       console.log('useGetBusinesses return ran')
