@@ -5,14 +5,18 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
-  Image
+  TouchableOpacity
 } from 'react-native'
 import ResultsDetail from './ResultsDetail'
 
-const renderItem = ({ item }) => {
-  return <ResultsDetail item={item} />
+const renderItem = (item, navigation) => {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate('ResultsShow')}>
+      <ResultsDetail item={item} />
+    </TouchableOpacity>
+  )
 }
-const YelpResults = ({ headerText, restaurants }) => {
+const YelpResults = ({ headerText, restaurants, navigation }) => {
   return (
     <ScrollView>
       <View style={styles.containerText}>
@@ -23,7 +27,15 @@ const YelpResults = ({ headerText, restaurants }) => {
         showsHorizontalScrollIndicator={false}
         data={restaurants}
         keyExtractor={restaurant => restaurant.id}
-        renderItem={renderItem}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ResultsShow')}
+            >
+              <ResultsDetail item={item} />
+            </TouchableOpacity>
+          )
+        }}
       />
     </ScrollView>
   )
@@ -33,14 +45,10 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginHorizontal: 10,
-  },
-  tinyLogo: {
-    width: 250,
-    height: 250
+    marginHorizontal: 10
   },
   containerText: {
-    marginBottom: 6,
+    marginBottom: 6
   }
 })
 

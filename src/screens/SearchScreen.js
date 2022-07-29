@@ -6,7 +6,7 @@ import YelpResults from '../components/YelpResults'
 import FilterByPrice from '../utils/FilterByPrice'
 import Divider from '../components/Divider'
 
-const SearchScreen = () => {
+const SearchScreen = ({ navigation }) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [searchApi, restaurants, errorMessage] = useGetBusinesses()
 
@@ -15,7 +15,8 @@ const SearchScreen = () => {
   }
 
   return (
-    <ScrollView style={{marginVertical: 20, }}>
+    <>
+      {console.log(navigation)}
       <SearchBar
         searchTerm={searchTerm}
         onHandleSetSearchTerm={handleSetSearchTerm}
@@ -23,37 +24,42 @@ const SearchScreen = () => {
           searchApi(searchTerm)
         }}
       />
-      <Text style={styles.title}>SearchScreen</Text>
-      <Text style={styles.title}>
-        # of Restaurants Found: {restaurants.length}
-      </Text>
-      {errorMessage ? handleDisplayErrorMessage(errorMessage) : null}
-      <Divider />
-      <View style={styles.yelpResults}>
-        <YelpResults
-          headerText={'Cost Effective'}
-          restaurants={FilterByPrice(restaurants, '$')}
-          style={styles.yelpResults}
-        />
-      </View>
-      <Divider />
-      <View style={styles.yelpResults}>
-        <YelpResults
-          headerText={'Bit Pricier'}
-          restaurants={FilterByPrice(restaurants, '$$')}
-          style={styles.yelpResults}
-        />
-      </View>
-      <Divider />
-      <View style={styles.yelpResults}>
-        <YelpResults
-          headerText={'High Dollar'}
-          restaurants={FilterByPrice(restaurants, '$$$')}
-          style={styles.yelpResults}
-        />
-      </View>
-      <Divider />
-    </ScrollView>
+      <ScrollView style={{ marginVertical: 20, flex: 1 }}>
+        <Text style={styles.title}>SearchScreen</Text>
+        <Text style={styles.title}>
+          # of Restaurants Found: {restaurants.length}
+        </Text>
+        {errorMessage ? handleDisplayErrorMessage(errorMessage) : null}
+        <Divider />
+        <View style={styles.yelpResults}>
+          <YelpResults
+            headerText={'Cost Effective'}
+            restaurants={FilterByPrice(restaurants, '$')}
+            style={styles.yelpResults}
+            navigation={navigation}
+          />
+        </View>
+        <Divider />
+        <View style={styles.yelpResults}>
+          <YelpResults
+            headerText={'Bit Pricier'}
+            restaurants={FilterByPrice(restaurants, '$$')}
+            style={styles.yelpResults}
+            navigation={navigation}
+          />
+        </View>
+        <Divider />
+        <View style={styles.yelpResults}>
+          <YelpResults
+            headerText={'High Dollar'}
+            restaurants={FilterByPrice(restaurants, '$$$')}
+            style={styles.yelpResults}
+            navigation={navigation}
+          />
+        </View>
+        <Divider />
+      </ScrollView>
+    </>
   )
 
   function handleDisplayErrorMessage (errorMessage) {
