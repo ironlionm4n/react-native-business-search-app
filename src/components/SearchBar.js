@@ -36,6 +36,7 @@ const SearchBar = props => {
             size={24}
             color='black'
             onPress={() => onHandleSetSearchTerm('')}
+            style={{paddingRight: 5}}
           />
         </View>
       </View>
@@ -47,12 +48,12 @@ export default SearchBar
 
 const styles = StyleSheet.create({
   background: {
-    height: 50,
+    height: 40,
     width: '90%',
     backgroundColor: 'rgb(255,255,255)',
     borderRadius: 15,
     marginHorizontal: 15,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   content: {
     display: 'flex',
@@ -60,18 +61,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingLeft: 5,
-    paddingTop: 3
+    paddingTop: 5
   },
   container: {
-    marginTop: 10
+    marginTop: 6
   },
   text: {
-    fontSize: 20,
+    fontSize: 24,
     paddingLeft: 5,
     display: 'flex',
     flex: 1,
-    // borderColor: 'black',
-    // borderWidth: 2,
-    height: 44
+    height: 44,
   }
 })

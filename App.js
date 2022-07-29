@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import SearchScreen from './src/screens/SearchScreen'
 import HomeScreen from './src/screens/HomeScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import ResultsShowScreen from './src/screens/ResultsShowScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -13,6 +14,7 @@ export default function App () {
       <Stack.Navigator initialRouteName='Home' screenOptions={{title: 'Restaurant App'}}>
         <Stack.Screen name='Home' component={HomeScreen} options={{title: 'Home'}}/>
         <Stack.Screen name='Search' component={SearchScreen} />
+        <Stack.Screen name="ResultsShow" component={ResultsShowScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
