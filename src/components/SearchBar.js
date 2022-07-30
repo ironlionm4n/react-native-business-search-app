@@ -26,16 +26,23 @@ const SearchBar = props => {
               searchInputRef = ref
             }}
             value={searchTerm}
-            onChange={(event) => onHandleSetSearchTerm(event.nativeEvent.value)}
+            onChange={event => onHandleSetSearchTerm(event.nativeEvent.value)}
             autoCorrect={false}
-            onEndEditing={(event) => onHandleSubmitSearch(event.nativeEvent.value)}
+            //onEndEditing={(event) => onHandleSubmitSearch(event.nativeEvent.value)}
+            onSubmitEditing={event => {
+              console.log('Native Event:', event.nativeEvent)
+              onHandleSubmitSearch(event.nativeEvent.text)
+            }}
           />
           <MaterialIcons
             name='clear'
             size={24}
             color='black'
-            onPress={() => onHandleSetSearchTerm('')}
-            style={{paddingRight: 5}}
+            onPress={() => {
+              onHandleSubmitSearch('')
+              searchInputRef.focus()
+            }}
+            style={{ paddingRight: 5 }}
           />
         </View>
       </View>
@@ -53,6 +60,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginHorizontal: 15,
     justifyContent: 'center',
+    shadowColor: 'rgba(0,0,0,1)',
+    shadowOffset: { height: 1, width: 2 },
+    shadowOpacity: 1,
   },
   content: {
     display: 'flex',
@@ -70,6 +80,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     display: 'flex',
     flex: 1,
-    height: 44,
+    height: 44
   }
 })

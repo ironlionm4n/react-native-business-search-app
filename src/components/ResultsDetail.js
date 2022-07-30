@@ -19,7 +19,10 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderRadius: 10,
-    margin: 10
+    margin: 10,
+    shadowColor: 'rgba(0,0,0, .9)',
+    shadowOffset: { height: 1, width: 2 },
+    shadowOpacity: 1,
   },
   container: {
     display: 'flex',
@@ -27,7 +30,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 2,
     borderRadius: 5,
-    marginHorizontal: 5,
     padding: 5,
   },
   text: {
