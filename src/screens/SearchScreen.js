@@ -19,7 +19,8 @@ const SearchScreen = ({ navigation }) => {
       <SearchBar
         searchTerm={searchTerm}
         onHandleSetSearchTerm={handleSetSearchTerm}
-        onHandleSubmitSearch={() => {
+        onHandleSubmitSearch={(searchTerm) => {
+          handleSetSearchTerm(searchTerm)
           searchApi(searchTerm)
         }}
       />

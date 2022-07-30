@@ -28,7 +28,7 @@ const SearchBar = props => {
             value={searchTerm}
             onChange={(event) => onHandleSetSearchTerm(event.nativeEvent.value)}
             autoCorrect={false}
-            onEndEditing={onHandleSubmitSearch}
+            onEndEditing={(event) => onHandleSubmitSearch(event.nativeEvent.value)}
           />
           <MaterialIcons
             name='clear'

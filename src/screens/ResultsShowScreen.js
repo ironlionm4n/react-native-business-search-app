@@ -73,10 +73,11 @@ const ResultsShowScreen = ({ route, navigation }) => {
           {address}, {cityStateZip} {result.location.country}
         </Text>
         {phone && formatPhone(phone)}
+        <Text>{result.rating} Stars, {result.review_count} Reviews</Text>
         {result.hours &&
           result.hours[0].open.map(day => {
             return (
-              <View>
+              <View key={day.day}>
                 <Text>{checkDayOfWeek(day.day)}</Text>
                 <Text>Open: {day.start}</Text>
                 <Text>Close: {day.end}</Text>
