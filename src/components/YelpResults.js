@@ -9,18 +9,11 @@ import {
 } from 'react-native'
 import ResultsDetail from './ResultsDetail'
 
-const renderItem = (item, navigation) => {
-  return (
-    <TouchableOpacity onPress={() => navigation.navigate('ResultsShow')}>
-      <ResultsDetail item={item} />
-    </TouchableOpacity>
-  )
-}
 const YelpResults = ({ headerText, restaurants, navigation }) => {
-  if(!restaurants.length) {
+  if (!restaurants.length) {
     return null
   }
-  
+
   return (
     <ScrollView>
       <View style={styles.containerText}>
@@ -34,9 +27,19 @@ const YelpResults = ({ headerText, restaurants, navigation }) => {
         renderItem={({ item }) => {
           return (
             <TouchableOpacity
-              onPress={() => navigation.navigate('ResultsShow', {
-                id: item.id
-              })}
+              style={{
+                backgroundColor: 'rgba(255,255,255,1)',
+                shadowColor: 'rgba(0,0,0, .9)',
+                shadowOffset: { height: 1, width: 2 },
+                shadowOpacity: 1,
+                margin: 15,
+                borderRadius:5,
+              }}
+              onPress={() =>
+                navigation.navigate('ResultsShow', {
+                  id: item.id
+                })
+              }
             >
               <ResultsDetail item={item} />
             </TouchableOpacity>

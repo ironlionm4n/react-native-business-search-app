@@ -1,8 +1,10 @@
-import { FlatList, StyleSheet, Text, View, Image } from 'react-native'
+import { FlatList, StyleSheet, Text, View, Image, Button } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import yelp from '../api/yelp'
+import * as Linking from 'expo-linking'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const ResultsShowScreen = ({ route, navigation }) => {
+const ResultsShowScreen = ({ route }) => {
   const [result, setResult] = useState(null)
   const { id } = route.params
 
@@ -67,13 +69,23 @@ const ResultsShowScreen = ({ route, navigation }) => {
   const phone = result.phone.replace('+', '')
   return (
     <View>
-      <View style={{display: 'flex', flexDirection: 'column'}}>
+      <View style={{ display: 'flex', flexDirection: 'column' }}>
         <Text>{result.name}</Text>
         <Text>
           {address}, {cityStateZip} {result.location.country}
         </Text>
         {phone && formatPhone(phone)}
-        <Text>{result.rating} Stars, {result.review_count} Reviews</Text>
+        <Text>
+          {result.rating} Stars, {result.review_count} Reviews
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            if (Linking.canOpenURL(result.url)) {
+              Linking.openURL(result.url)
+            }
+          }}
+          style={{backgroundColor: 'gray', width: '55%', height: 50}}
+        ><Text>Visit Website</Text></TouchableOpacity>
         {result.hours &&
           result.hours[0].open.map(day => {
             return (
