@@ -8,7 +8,7 @@ import Divider from '../components/Divider'
 import CitySelection from '../components/CitySelection'
 
 const SearchScreen = ({ navigation }) => {
-  const [searchTerm, setSearchTerm] = useState('pizza')
+  const [searchTerm, setSearchTerm] = useState('Pizza')
   const [newCity, setCity] = useState('atlanta')
   const [searchApi, restaurants, errorMessage] = useGetBusinesses()
 
@@ -35,11 +35,13 @@ const SearchScreen = ({ navigation }) => {
       />
       <ScrollView style={{ marginVertical: 20, flex: 1 }}>
         <Text style={styles.title}>
-          # of Restaurants Found: {restaurants.length}
+          Searching
+          {' ' +
+            newCity.slice(0, 1).toUpperCase() +
+            newCity.slice(1, newCity.length)}
         </Text>
         <Text style={styles.title}>
-          Searching {newCity.slice(0, 1).toUpperCase() +
-                    newCity.slice(1, newCity.length)}
+          # of Restaurants Found: {restaurants.length}
         </Text>
         {errorMessage ? <Text>{errorMessage}</Text> : null}
         <Divider />
@@ -86,8 +88,7 @@ const styles = StyleSheet.create({
   },
   yelpResults: {
     marginVertical: 20,
-    marginHorizontal: 20,
-
+    marginHorizontal: 20
   }
 })
 
